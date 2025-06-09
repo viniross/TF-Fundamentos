@@ -1,6 +1,6 @@
 public class Evento {
     private int codigo;
-    private String nome;
+    private String nomeEvento;
     private String tipo;
     private String dataInicial;
     private String dataFinal;
