@@ -60,4 +60,108 @@ public class Evento {
         this.quantInscricoes = 0;
         this.listaInscricoes = new Inscricoes[0];
     }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getNomeEvento() {
+        return nomeEvento;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public LocalDate getDataInicial() {
+        return dataInicial;
+    }
+
+    public LocalDate getDataFinal() {
+        return dataFinal;
+    }
+
+    public int getQuantSalas() {
+        return quantSalas;
+    }
+
+    public Salas[] getListaSalas() {
+        return listaSalas;
+    }
+
+    public int getQuantInscricoes() {
+        return quantInscricoes;
+    }
+
+    public Inscricoes[] getListaInscricoes() {
+        return listaInscricoes;
+    }
+
+    public void setCodigo(int codigo) {
+        if (codigo <= 0) {
+            System.out.println("Código inválido! Mantendo o código atual.");
+        } else {
+            this.codigo = codigo;
+        }
+    }
+
+    public void setNomeEvento(String nomeEvento) {
+        this.nomeEvento = nomeEvento;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setDataInicial(LocalDate dataInicial) {
+        if (dataInicial == null) {
+            System.out.println("Data inicial inválida! Mantendo a data atual.");
+        } else {
+            this.dataInicial = dataInicial;
+        }
+    }
+
+    public void setDataFinal(LocalDate dataFinal) {
+        if (dataFinal == null) {
+            System.out.println("Data final inválida! Mantendo a data atual.");
+        } else if (dataFinal.isBefore(this.dataInicial)) {
+            System.out.println("A data final não pode ser anterior à data inicial! Mantendo a data atual.");
+        } else {
+            this.dataFinal = dataFinal;
+        }
+    }
+
+    public void setQuantSalas(int quantSalas) {
+        if (quantSalas < 1) {
+            System.out.println("Quantidade de salas inválida! Mantendo a quantidade atual.");
+        } else {
+            this.quantSalas = quantSalas;
+            this.listaSalas = new Salas[quantSalas];
+        }
+    }
+
+    public void setListaSalas(Salas[] listaSalas) {
+        if (listaSalas == null || listaSalas.length != this.quantSalas) {
+            System.out.println("Lista de salas inválida! Mantendo a lista atual.");
+        } else {
+            this.listaSalas = listaSalas;
+        }
+    }
+
+    public void setQuantInscricoes(int quantInscricoes) {
+        if (quantInscricoes < 0) {
+            System.out.println("Quantidade de inscrições inválida! Mantendo a quantidade atual.");
+        } else {
+            this.quantInscricoes = quantInscricoes;
+            this.listaInscricoes = new Inscricoes[quantInscricoes];
+        }
+    }
+
+    public void setListaInscricoes(Inscricoes[] listaInscricoes) {
+        if (listaInscricoes == null || listaInscricoes.length != this.quantInscricoes) {
+            System.out.println("Lista de inscrições inválida! Mantendo a lista atual.");
+        } else {
+            this.listaInscricoes = listaInscricoes;
+        }
+    }
 }
