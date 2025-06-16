@@ -181,4 +181,20 @@ public class Evento {
             System.out.println("Não há espaço para mais salas!");
         }
     }
+
+    public void removeSala(String identificacaoSala) {
+        if (identificacaoSala == null || identificacaoSala.isEmpty()) {
+            System.out.println("Identificação da sala inválida! Não foi possível remover.");
+            return;
+        }
+
+        for (int i = 0; i < this.quantSalas; i++) {
+            if (this.listaSalas[i] != null && this.listaSalas[i].getIdentificacaoSala().equals(identificacaoSala)) {
+                this.listaSalas[i] = null;
+                System.out.println("Sala removida com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Sala não encontrada!");
+    }
 }
