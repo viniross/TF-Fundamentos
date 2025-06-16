@@ -10,6 +10,7 @@ public class Evento {
     private Salas[] listaSalas;
     private int quantInscricoes;
     private Inscricoes[] listaInscricoes;
+    private int index;
 
     public Evento(int codigo, String nomeEvento, String tipo, LocalDate dataInicial, LocalDate dataFinal, int quantSalas) {
         this.codigo = codigo;
@@ -21,6 +22,7 @@ public class Evento {
         this.listaSalas = new Salas[quantSalas];
         this.quantInscricoes = 0;
         this.listaInscricoes = new Inscricoes[quantInscricoes];
+        index = 0;
 
         if (codigo <= 0) {
             System.out.println("Código inválido! Utilizando o código padrão 1.");
@@ -162,6 +164,21 @@ public class Evento {
             System.out.println("Lista de inscrições inválida! Mantendo a lista atual.");
         } else {
             this.listaInscricoes = listaInscricoes;
+        }
+    }
+
+    public void addSala(Salas sala) {
+        if (sala == null) {
+            System.out.println("Sala inválida! Não foi possível adicionar.");
+            return;
+        }
+
+        if(index != this.quantSalas) {
+            this.listaSalas[index] = sala;
+            index++;
+            System.out.println("Sala adicionada com sucesso!");
+        } else {
+            System.out.println("Não há espaço para mais salas!");
         }
     }
 }
