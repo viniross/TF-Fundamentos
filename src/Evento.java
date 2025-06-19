@@ -197,4 +197,25 @@ public class Evento {
         }
         System.out.println("Sala não encontrada!");
     }
+
+    public Sala[] buscaSalasPorLotacao(int lotacaoMaxima) {
+        int contSalas = 0;
+        for (int i = 0; i < quantSalas; i++) {
+            if (salas[i].getLotacaoMaxima() <= lotacaoMaxima) {
+                contSalas++;
+            }
+        }
+
+        Sala[] resultado = new Sala[contSalas];
+        int indexBuscaSalas = 0;
+
+        for (int i = 0; i < quantSalas; i++) {
+            if (salas[i].getLotacaoMaxima() <= lotacaoMaxima) {
+                resultado[indexBuscaSalas] = salas[i];
+                index++;
+            }
+        }
+
+        return resultado;
+    }
 }
