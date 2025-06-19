@@ -7,23 +7,12 @@ public class Evento {
     private LocalDate dataInicial;
     private LocalDate dataFinal;
     private int quantSalas;
-    private Salas[] listaSalas;
+    private Sala[] listaSalas;
     private int quantInscricoes;
-    private Inscricoes[] listaInscricoes;
+    private Inscricao[] listaInscricoes;
     private int index;
 
     public Evento(int codigo, String nomeEvento, String tipo, LocalDate dataInicial, LocalDate dataFinal, int quantSalas) {
-        this.codigo = codigo;
-        this.nomeEvento = nomeEvento;
-        this.tipo = tipo;
-        this.dataInicial = dataInicial;
-        this.dataFinal = dataFinal;
-        this.quantSalas = quantSalas;
-        this.listaSalas = new Salas[quantSalas];
-        this.quantInscricoes = 0;
-        this.listaInscricoes = new Inscricoes[quantInscricoes];
-        index = 0;
-
         if (codigo <= 0) {
             System.out.println("Código inválido! Utilizando o código padrão 1.");
             this.codigo = 1;
@@ -31,21 +20,24 @@ public class Evento {
             this.codigo = codigo;
         }
 
-        if (dataInicial == null) {
+        this.nomeEvento = nomeEvento;
+        this.tipo = tipo;
+
+         if (dataInicial == null) {
             System.out.println("Data incial inválida! Utilizando a data atual.");
             this.dataInicial = LocalDate.now();
         } else {
             this.dataInicial = dataInicial;
         }
 
-        if (dataFinal == null) {
+         if (dataFinal == null) {
             System.out.println("Data final inválida! Utilizando a data atual.");
             this.dataFinal = LocalDate.now();
         } else {
             this.dataFinal = dataFinal;
         }
 
-        if (this.dataFinal.isBefore(this.dataIncial)) {
+        if (this.dataFinal.isBefore(this.dataInicial)) {
             System.out.println("A data final não pode ser anterior à data inicial! Corrigindo para a data inicial.");
             this.dataFinal = this.dataInicial;
         }
@@ -57,10 +49,10 @@ public class Evento {
             this.quantSalas = quantSalas;
         }
 
-        this.listaSalas = new Salas[this.quantSalas];
-
+        this.listaSalas = new Sala[this.quantSalas];
         this.quantInscricoes = 0;
-        this.listaInscricoes = new Inscricoes[0];
+        this.listaInscricoes = new Inscricao[0];
+        index = 0;
     }
 
     public int getCodigo() {
@@ -87,7 +79,7 @@ public class Evento {
         return quantSalas;
     }
 
-    public Salas[] getListaSalas() {
+    public Sala[] getListaSalas() {
         return listaSalas;
     }
 
@@ -95,7 +87,7 @@ public class Evento {
         return quantInscricoes;
     }
 
-    public Inscricoes[] getListaInscricoes() {
+    public Inscricao[] getListaInscricoes() {
         return listaInscricoes;
     }
 
@@ -138,11 +130,11 @@ public class Evento {
             System.out.println("Quantidade de salas inválida! Mantendo a quantidade atual.");
         } else {
             this.quantSalas = quantSalas;
-            this.listaSalas = new Salas[quantSalas];
+            this.listaSalas = new Sala[quantSalas];
         }
     }
 
-    public void setListaSalas(Salas[] listaSalas) {
+    public void setListaSalas(Sala[] listaSalas) {
         if (listaSalas == null || listaSalas.length != this.quantSalas) {
             System.out.println("Lista de salas inválida! Mantendo a lista atual.");
         } else {
@@ -155,11 +147,11 @@ public class Evento {
             System.out.println("Quantidade de inscrições inválida! Mantendo a quantidade atual.");
         } else {
             this.quantInscricoes = quantInscricoes;
-            this.listaInscricoes = new Inscricoes[quantInscricoes];
+            this.listaInscricoes = new Inscricao[quantInscricoes];
         }
     }
 
-    public void setListaInscricoes(Inscricoes[] listaInscricoes) {
+    public void setListaInscricoes(Inscricao[] listaInscricoes) {
         if (listaInscricoes == null || listaInscricoes.length != this.quantInscricoes) {
             System.out.println("Lista de inscrições inválida! Mantendo a lista atual.");
         } else {
@@ -167,7 +159,7 @@ public class Evento {
         }
     }
 
-    public void addSala(Salas sala) {
+    public void addSala(Sala sala) {
         if (sala == null) {
             System.out.println("Sala inválida! Não foi possível adicionar.");
             return;
@@ -201,7 +193,7 @@ public class Evento {
     public Sala[] buscaSalasPorLotacao(int lotacaoMaxima) {
         int contSalas = 0;
         for (int i = 0; i < quantSalas; i++) {
-            if (salas[i].getLotacaoMaxima() <= lotacaoMaxima) {
+            if (listaSalas[i].getLotacaoMaxima() <= lotacaoMaxima) {
                 contSalas++;
             }
         }
@@ -210,8 +202,8 @@ public class Evento {
         int indexBuscaSalas = 0;
 
         for (int i = 0; i < quantSalas; i++) {
-            if (salas[i].getLotacaoMaxima() <= lotacaoMaxima) {
-                resultado[indexBuscaSalas] = salas[i];
+            if (listaSalas[i].getLotacaoMaxima() <= lotacaoMaxima) {
+                resultado[indexBuscaSalas] = listaSalas[i];
                 index++;
             }
         }
