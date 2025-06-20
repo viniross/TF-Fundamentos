@@ -237,7 +237,7 @@ public class Evento {
         }
     }
 
-    public Inscricao buscaAlunoPorCPF(String cpf){
+    public Inscricao buscaInscricaoPorCpf(String cpf){
         for(int i = 0; i < index; i++) {
             if (listaInscricoes[i].getCpf().equals(cpf) == true) {
                 return listaInscricoes[i];
@@ -257,11 +257,14 @@ public class Evento {
         return contInscritos;
     }
 
-    public int quantInscritosPorCat() {
+    public int quantInscritosPorCat(int categoria) {
         int contInscritos = 0;
 
         for (int i = 0; i < quantInscritos; i++) {
-            if (listaInscricoes[i].getCategoria().equals("A") == true) {
+            if (listaInscricoes[i] != null && listaInscricoes[i].getCategoria() == categoria) {
+                contInscritos++;
+            }
         }
+        return contInscritos;
     }
 }

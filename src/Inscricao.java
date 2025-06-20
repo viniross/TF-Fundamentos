@@ -1,20 +1,31 @@
 public class Inscricao {
     private String identificacaoInscricao;
     private String nomeInscricao;
-    private String categoria;
+    private int categoria;
     private String cpf;
     private String cargo;
     private String instituicao;
     private double preco;
 
-    public Inscricao(String identificacaoInscricao, String nomeInscricao, String categoria, String cpf, String cargo, String instituicao, double preco){
+    public Inscricao(String identificacaoInscricao, String nomeInscricao, int categoria, String cpf, String cargo, String instituicao, double preco){
         this.identificacaoInscricao = identificacaoInscricao;
         this.nomeInscricao = nomeInscricao;
-        this.categoria = categoria;
+
+        if (categoria == 1 || categoria == 2 || categoria == 3) {
+            this.categoria = categoria;
+        } else {
+            this.categoria = 0;
+        }
+
         this.cpf = cpf;
         this.cargo = cargo;
         this.instituicao = instituicao;
-        this.preco = preco;
+
+        if(preco < 1){
+        System.out.println("Preço invalido, informe um valor maior que zero.");
+        } else {
+            this.preco = preco;
+        }
     }
 
     public String getIdentificacaoInscricao(){
@@ -53,8 +64,12 @@ public class Inscricao {
         this.nomeInscricao = nomeInscricao;
     }
 
-    public void setCategoria(String categoria){
-        this.categoria = categoria;
+    public void setCategoria(int categoria){
+        if (categoria == 1 || categoria == 2 || categoria == 3) {
+            this.categoria = categoria;
+        } else {
+            this.categoria = 0;
+        }
     }
 
     public void setCpf(String cpf){
@@ -72,7 +87,7 @@ public class Inscricao {
     }
 
     public void setPreco(double preco){
-        if(preco<-1){
+        if(preco < 1){
         System.out.println("Preço invalido, informe um valor maior que zero.");
         } else {
             this.preco = preco;
