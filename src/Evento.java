@@ -207,7 +207,17 @@ public class Evento {
                 index++;
             }
         }
-
         return resultado;
+    }
+
+    public int quantSalasAlocadas() {
+        int contSalasAlocadas = 0;
+
+        for (int i = 0; i < quantSalas; i++) {
+            if (listaSalas[i] != null) {
+                contSalasAlocadas++;
+            }
+        }
+        return contSalasAlocadas;
     }
 }
