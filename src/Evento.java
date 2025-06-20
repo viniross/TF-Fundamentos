@@ -9,6 +9,7 @@ public class Evento {
     private int quantSalas;
     private Sala[] listaSalas;
     private int quantInscricoes;
+    private int inscricoesCadastradas;
     private Inscricao[] listaInscricoes;
     private int index;
 
@@ -51,7 +52,8 @@ public class Evento {
 
         this.listaSalas = new Sala[this.quantSalas];
         this.quantInscricoes = 0;
-        this.listaInscricoes = new Inscricao[0];
+        this.listaInscricoes = new Inscricao[this.quantInscricoes];
+        this.inscricoesCadastradas = 0;
         index = 0;
     }
 
@@ -219,5 +221,19 @@ public class Evento {
             }
         }
         return contSalasAlocadas;
+    }
+
+    public boolean addInscricao(Inscricao inscricao) {
+        if (inscricao == null) {
+            return false;
+        } 
+
+        if (inscricoesCadastradas < quantInscricoes) {
+            listaInscricoes[inscricoesCadastradas] = inscricao;
+            quantInscricoes++;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
