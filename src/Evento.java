@@ -249,11 +249,19 @@ public class Evento {
     public int quantInscritos(){
         int contInscritos = 0
 
-        for(int i = 0; i < quantSalas; i++) {
-            if(listaSalas[i] != null) {
+        for (int i = 0; i < quantInscritos; i++) {
+            if(listaInscricoes[i] != null) {
                 contInscritos++;
             }
         }
         return contInscritos;
+    }
+
+    public int quantInscritosPorCat() {
+        int contInscritos = 0;
+
+        for (int i = 0; i < quantInscritos; i++) {
+            if (listaInscricoes[i].getCategoria().equals("A") == true) {
+        }
     }
 }
