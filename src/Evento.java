@@ -267,4 +267,15 @@ public class Evento {
         }
         return contInscritos;
     }
+
+    public double valorTotalInscricoes() {
+        double valorTotal = 0;
+
+        for (int i = 0; i < inscricoesCadastradas; i++) {
+            if (listaInscricoes[i] != null) {
+                valorTotal += listaInscricoes[i].getValorInscricao();
+            }
+        }
+        return valorTotal;
+    }
 }
