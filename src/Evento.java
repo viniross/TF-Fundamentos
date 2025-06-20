@@ -236,4 +236,13 @@ public class Evento {
             return false;
         }
     }
+
+    public Inscricao buscaAlunoPorCPF(String cpf){
+        for(int i = 0; i < index; i++) {
+            if (listaInscricoes[i].getCpf().equals(cpf) == true) {
+                return listaInscricoes[i];
+            }
+        }
+        return null;
+    }
 }
