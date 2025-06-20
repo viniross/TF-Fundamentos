@@ -58,7 +58,9 @@ public class Inscricao {
     }
 
     public void setCpf(String cpf){
-        this.cpf = cpf;
+        if (cpf.length() == 11 && cpf.matches("[0-9]+")){
+            this.cpf = cpf;
+        }
     }
 
     public void setCargo(String cargo){
