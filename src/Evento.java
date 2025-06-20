@@ -245,4 +245,15 @@ public class Evento {
         }
         return null;
     }
+
+    public int quantInscritos(){
+        int contInscritos = 0
+
+        for(int i = 0; i < quantSalas; i++) {
+            if(listaSalas[i] != null) {
+                contInscritos++;
+            }
+        }
+        return contInscritos;
+    }
 }
