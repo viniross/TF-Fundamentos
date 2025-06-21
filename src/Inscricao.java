@@ -1,4 +1,6 @@
 public class Inscricao {
+    private static int contador = 1;
+
     private String identificacaoInscricao;
     private String nomeInscricao;
     private int categoria;
@@ -7,8 +9,10 @@ public class Inscricao {
     private String instituicao;
     private double preco;
 
-    public Inscricao(String identificacaoInscricao, String nomeInscricao, int categoria, String cpf, String cargo, String instituicao, double preco) {
-        this.identificacaoInscricao = identificacaoInscricao;
+    public Inscricao(String nomeInscricao, int categoria, String cpf, String cargo, String instituicao, double preco) {
+        this.identificacaoInscricao = "INS" + contador; 
+        contador++; 
+
         this.nomeInscricao = nomeInscricao;
 
         if (categoria == 1 || categoria == 2 || categoria == 3) {
@@ -39,6 +43,19 @@ public class Inscricao {
     public int getCategoria() {
         return categoria;
     }
+
+    public String getCategoriaTexto() {
+    switch (categoria) {
+        case 1:
+            return "Professor";
+        case 2:
+            return "Estudante";
+        case 3:
+            return "Profissional";
+        default:
+            return "Categoria inválida";
+    }
+}
 
     public String getCpf() {
         return cpf;

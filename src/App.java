@@ -4,12 +4,14 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in); 
+        Evento[] listaEventos = new Evento[100];
 
         //variaveis evento
         int codigo;
         String nomeEvento;
         String tipo;
-        LocalDate dataIncial;
+        double precoBaseInscricao;
+        LocalDate dataInicial;
         LocalDate dataFinal;
         int quantSalas;
         Sala[] listaSalas;
@@ -35,7 +37,6 @@ public class App {
         //variaveis para o switch case
         int acaoPrincipal = 0;
         int acaoCadastro = 0;
-        int acaoCategoria = 0;
         int acaoConsulta = 0;
         int acaoConsultaEvento = 0;
         int acaoConsultaInscricaoEvento = 0;
@@ -46,17 +47,62 @@ public class App {
             acaoPrincipal = in.nextInt();
 
             switch (acaoPrincipal) {
-                case 1: // Cadastro
+                case 1: 
                     menuCadastro();
                     acaoCadastro = in.nextInt();
                     switch (acaoCadastro) {
                         case 1:
-                            System.out.println("Cadastrar novo Evento");
-                            // chamada do método de cadastro de evento
+                            System.out.println("Digite o código do Evento:");
+                            codigo = in.nextInt();
+
+                            System.out.println("Digite o nome do Evento:");
+                            nomeEvento = in.nextLine();
+
+                            System.out.println("Digite o tipo do Evento:");
+                            tipo = in.nextLine();
+
+                            System.out.println("Digite o valor do Evento:");
+                            precoBaseInscricao = in.nextDouble();
+
+                            System.out.println("Digite a data inicial (AAAA-MM-DD):");
+                            String dataInicialStr = in.nextLine();
+                            dataInicial = LocalDate.parse(dataInicialStr);
+
+                            System.out.println("Digite a data final (AAAA-MM-DD):");
+                            String dataFinalStr = in.nextLine();
+                            dataFinal = LocalDate.parse(dataFinalStr);
+
+                            System.out.println("Digite a quantidade de salas:");
+                            quantSalas = in.nextInt();
+
+                            Evento evento = new Evento(codigo, nomeEvento, tipo, precoBaseInscricao, dataInicial, dataFinal, quantSalas);
+                            System.out.println("Evento cadastrado com sucesso!");
                             break;
                         case 2:
-                            System.out.println("Cadastrar nova Inscrição no Evento");
-                            // chamada do método de cadastro de inscrição
+                            System.out.println("Escolha o evento para se inscrever:");
+                            int eventoEscolhido = in.nextInt();
+                            evento = listaEventos[eventoEscolhido];
+
+                            System.out.println("Digite seu Nome:");
+                            nomeInscricao = in.nextLine();
+
+                            System.out.println("Escolha a sua Categoria:");
+                            System.out.println("1 - Professor");
+                            System.out.println("2 - Estudante");
+                            System.out.println("3 - Profissional");
+                            categoria = in.nextInt();
+
+                            System.out.println("Digite seu CPF:");
+                            cpf = in.nextLine();
+
+                            System.out.println("Digite seu Cargo:");
+                            cargo = in.nextLine();
+
+                            System.out.println("Digite sua instituicao:");
+                            instituicao = in.nextLine();
+
+                            Inscricao novaInscricao = new Inscricao(nomeInscricao, categoria, cpf, cargo, instituicao, evento.getPrecoBaseInscricao());
+                            evento.addInscricao(novaInscricao);
                             break;
                         case 3:
                             System.out.println("Voltando ao menu principal...");

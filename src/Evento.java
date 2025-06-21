@@ -4,6 +4,7 @@ public class Evento {
     private int codigo;
     private String nomeEvento;
     private String tipo;
+    private double precoBaseInscricao;
     private LocalDate dataInicial;
     private LocalDate dataFinal;
     private int quantSalas;
@@ -13,7 +14,7 @@ public class Evento {
     private Inscricao[] listaInscricoes;
     private int index;
 
-    public Evento(int codigo, String nomeEvento, String tipo, LocalDate dataInicial, LocalDate dataFinal, int quantSalas) {
+    public Evento(int codigo, String nomeEvento, String tipo, double precoBaseInscricao, LocalDate dataInicial, LocalDate dataFinal, int quantSalas) {
         if (codigo <= 0) {
             System.out.println("Código inválido! Utilizando o código padrão 1.");
             this.codigo = 1;
@@ -23,6 +24,12 @@ public class Evento {
 
         this.nomeEvento = nomeEvento;
         this.tipo = tipo;
+        if (precoBaseInscricao < 0) {
+            System.out.println("Preco inválido! Evento gratis.");
+            this.precoBaseInscricao = 0;
+        } else {
+            this.precoBaseInscricao = precoBaseInscricao;
+        }
 
          if (dataInicial == null) {
             System.out.println("Data incial inválida! Utilizando a data atual.");
@@ -67,6 +74,10 @@ public class Evento {
 
     public String getTipo() {
         return tipo;
+    }
+
+    public double getPrecoBaseInscricao() {
+        return precoBaseInscricao;
     }
 
     public LocalDate getDataInicial() {
