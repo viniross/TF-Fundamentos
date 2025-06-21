@@ -89,6 +89,10 @@ public class Evento {
         return quantInscricoes;
     }
 
+    public int getInscricoesCadastradas() {
+        return inscricoesCadastradas;
+    }
+
     public Inscricao[] getListaInscricoes() {
         return listaInscricoes;
     }
@@ -247,9 +251,9 @@ public class Evento {
     }
 
     public int quantInscritos(){
-        int contInscritos = 0
+        int contInscritos = 0;
 
-        for (int i = 0; i < quantInscritos; i++) {
+        for (int i = 0; i < quantInscricoes; i++) {
             if(listaInscricoes[i] != null) {
                 contInscritos++;
             }
@@ -260,7 +264,7 @@ public class Evento {
     public int quantInscritosPorCat(int categoria) {
         int contInscritos = 0;
 
-        for (int i = 0; i < quantInscritos; i++) {
+        for (int i = 0; i < quantInscricoes; i++) {
             if (listaInscricoes[i] != null && listaInscricoes[i].getCategoria() == categoria) {
                 contInscritos++;
             }
