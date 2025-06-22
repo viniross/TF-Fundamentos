@@ -165,8 +165,6 @@ public class App {
                                     break;
 
                                 case 4:
-                                    System.out.println("Buscar Sala");
-
                                     System.out.println("Escolha o evento para procurar a sala pela Identificação:");
                                     eventoEscolhido = in.nextInt();
                                     evento = listaEventos[eventoEscolhido];
@@ -178,19 +176,37 @@ public class App {
                                     break;
 
                                 case 5:
-                                    System.out.println("Quantidade de Salas Alocadas");
+                                    System.out.println("Escolha o evento para saber quantas salas estão alocadas:");
+                                    eventoEscolhido = in.nextInt();
+                                    evento = listaEventos[eventoEscolhido];
+
+                                    evento.quantSalasAlocadas();
                                     break;
 
                                 case 6:
-                                    System.out.println("Quantidade de Inscritos no Evento");
+                                    System.out.println("Escolha o evento para saber quantas pessoas estão inscritas:");
+                                    eventoEscolhido = in.nextInt();
+                                    evento = listaEventos[eventoEscolhido];
+
+                                    evento.quantInscritos();
                                     break;
 
                                 case 7:
-                                    System.out.println("Quantidade de Inscritos por Categoria");
+                                    System.out.println("Escolha o evento para saber quantas pessoas estão inscritas por categoria:");
+                                    eventoEscolhido = in.nextInt();
+                                    evento = listaEventos[eventoEscolhido];
+
+                                    evento.quantInscritosPorCat();
                                     break;
 
                                 case 8:
                                     System.out.println("Valor Total das Inscrições");
+
+                                    System.out.println("Escolha o evento para saber o valor total arrecadado por ele:");
+                                    eventoEscolhido = in.nextInt();
+                                    evento = listaEventos[eventoEscolhido];
+
+                                    evento.valorTotalInscricoes();
                                     break;
 
                                 case 9:
