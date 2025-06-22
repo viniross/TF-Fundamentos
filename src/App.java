@@ -227,7 +227,7 @@ public class App {
                                     break;
 
                                 case 10:                                   
-                                    System.out.println("Escolha o evento para quem esta inscrito");
+                                    System.out.println("Escolha o evento para saber quem esta inscrito");
                                     eventoEscolhido = in.nextInt();
                                     evento = listaEventos[eventoEscolhido];
 
@@ -253,7 +253,14 @@ public class App {
                             acaoConsultaInscricaoEvento = in.nextInt();
                             switch (acaoConsultaInscricaoEvento) {
                                 case 1:
-                                    System.out.println("Buscar Inscrição no Evento");
+                                    System.out.println("Escolha o evento para buscar um inscrito pelo seu CPF");
+                                    int eventoEscolhido = in.nextInt();
+                                    Evento evento = listaEventos[eventoEscolhido];
+
+                                    System.out.println("Digite o seu CPF:");
+                                    cpf = in.nextLine();
+
+                                    evento.buscaInscricaoPorCpf(cpf);
                                     break;
 
                                 case 2:
@@ -269,7 +276,14 @@ public class App {
                             acaoConsultaInscricao = in.nextInt();
                             switch (acaoConsultaInscricao) {
                                 case 1:
-                                    System.out.println("Buscar Inscrição Geral");
+                                    System.out.println("Digite seu CPF para saber todos eventos que voce está cadastrado");
+                                    cpf = in.nextLine();
+
+                                    Evento[] eventosDaPessoa = buscaEventosPorCpf(cpf, listaEventos);
+
+                                    for (int i = 0; i < eventosDaPessoa.length; i++) {
+                                        System.out.println("Inscrito no evento: " + eventosDaPessoa[i].getNomeEvento());
+                                    }
                                     break;
 
                                 case 2:
@@ -298,6 +312,24 @@ public class App {
                     System.out.println("Opção inválida no menu principal.");
             }
         }
+    }
+
+    public static Evento[] buscaEventosPorCpf(String cpf, Evento[] listaEventos) {
+        int count = 0;
+        for (int i = 0; i < listaEventos.length; i++) {
+            if (listaEventos[i] != null && listaEventos[i].buscaInscricaoPorCpf(cpf) != null) {
+                count++;
+            }
+        }
+
+        Evento[] eventosEncontrados = new Evento[count];
+        int idx = 0;
+        for (int i = 0; i < listaEventos.length; i++) {
+            if (listaEventos[i] != null && listaEventos[i].buscaInscricaoPorCpf(cpf) != null) {
+                eventosEncontrados[idx++] = listaEventos[i];
+            }
+        }
+        return eventosEncontrados;
     }
 
     public static void menuPrincipal() {
