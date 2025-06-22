@@ -285,32 +285,32 @@ public class Evento {
     }
 
     public int[] quantInscritosPorCat() {
-    int[] categoriasTemp = new int[quantInscricoes];
-    int count = 0;
+        int[] categoriasTemp = new int[quantInscricoes];
+        int count = 0;
 
-    for (int i = 0; i < quantInscricoes; i++) {
-        if (listaInscricoes[i] != null) {
-            int cat = listaInscricoes[i].getCategoria();
-            boolean jaExiste = false;
-            for (int j = 0; j < count; j++) {
-                if (categoriasTemp[j] == cat) {
-                    jaExiste = true;
-                    break;
+        for (int i = 0; i < quantInscricoes; i++) {
+            if (listaInscricoes[i] != null) {
+                int cat = listaInscricoes[i].getCategoria();
+                boolean jaExiste = false;
+                for (int j = 0; j < count; j++) {
+                    if (categoriasTemp[j] == cat) {
+                        jaExiste = true;
+                        break;
+                    }
+                }
+                if (!jaExiste) {
+                    categoriasTemp[count] = cat;
+                    count++;
                 }
             }
-            if (!jaExiste) {
-                categoriasTemp[count] = cat;
-                count++;
-            }
         }
-    }
 
-    int[] categoriasUnicas = new int[count];
-    for (int i = 0; i < count; i++) {
-        categoriasUnicas[i] = categoriasTemp[i];
+        int[] categoriasUnicas = new int[count];
+        for (int i = 0; i < count; i++) {
+            categoriasUnicas[i] = categoriasTemp[i];
+        }
+        return categoriasUnicas;
     }
-    return categoriasUnicas;
-}
 
     public double valorTotalInscricoes() {
         double valorTotal = 0;

@@ -202,7 +202,7 @@ public class App {
                                 case 8:
                                     System.out.println("Valor Total das Inscrições");
 
-                                    System.out.println("Escolha o evento para saber o valor total arrecadado por ele:");
+                                    System.out.println("Escolha o evento para saber o valor total arrecadado por ele");
                                     eventoEscolhido = in.nextInt();
                                     evento = listaEventos[eventoEscolhido];
 
@@ -211,15 +211,39 @@ public class App {
 
                                 case 9:
                                     System.out.println("Listar Todas as Salas Alocadas");
+                                    System.out.println("Escolha o evento para saber as salas que estão alocadas");
+                                    eventoEscolhido = in.nextInt();
+                                    evento = listaEventos[eventoEscolhido];
+
+                                    Sala[] listaSalasAux = evento.getListaSalas();
+                                    int totalSalas = evento.getQuantSalas();
+
+                                    System.out.println("Salas alocadas no evento:");
+                                    for (int i = 0; i < totalSalas; i++) {
+                                        if (listaSalasAux[i] != null) {
+                                            System.out.println("Identificação: " + listaSalasAux[i].getIdentificacaoSala());
+                                        }
+                                    }
                                     break;
 
-                                case 10:
-                                    System.out.println("Listar Todas as Inscrições no Evento");
+                                case 10:                                   
+                                    System.out.println("Escolha o evento para quem esta inscrito");
+                                    eventoEscolhido = in.nextInt();
+                                    evento = listaEventos[eventoEscolhido];
+
+                                    Inscricao[] listaInscricao = evento.getListaInscricoes();
+                                    int total = evento.getInscricoesCadastradas();
+
+                                    System.out.println("Lista de inscritos no evento:");
+                                        for (int i = 0; i < total; i++) {
+                                            System.out.println("Nome: " + listaInscricao[i].getNomeInscricao() + "\nID Inscrição: " + listaInscricao[i].getIdentificacaoInscricao());
+                                        }
                                     break;
 
                                 case 11:
                                     System.out.println("Voltando ao menu de consulta...");
                                     break;
+
                                 default:
                                     System.out.println("Opção inválida no menu de consulta de evento.");
                             }
@@ -231,9 +255,11 @@ public class App {
                                 case 1:
                                     System.out.println("Buscar Inscrição no Evento");
                                     break;
+
                                 case 2:
                                     System.out.println("Voltando ao menu de consulta...");
                                     break;
+
                                 default:
                                     System.out.println("Opção inválida.");
                             }
@@ -245,16 +271,20 @@ public class App {
                                 case 1:
                                     System.out.println("Buscar Inscrição Geral");
                                     break;
+
                                 case 2:
                                     System.out.println("Voltando ao menu de consulta...");
                                     break;
+
                                 default:
                                     System.out.println("Opção inválida.");
                             }
                             break;
+
                         case 4:
                             System.out.println("Voltando ao menu principal...");
                             break;
+
                         default:
                             System.out.println("Opção inválida no menu de consulta.");
                     }
