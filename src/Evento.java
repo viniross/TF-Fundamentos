@@ -1,7 +1,11 @@
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class Evento {
-    private int codigo;
+    private static int contadorEventos = 1;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private String codigo;
     private String nomeEvento;
     private String tipo;
     private double precoBaseInscricao;
@@ -14,13 +18,8 @@ public class Evento {
     private Inscricao[] listaInscricoes;
     private int index;
 
-    public Evento(int codigo, String nomeEvento, String tipo, double precoBaseInscricao, LocalDate dataInicial, LocalDate dataFinal, int quantSalas) {
-        if (codigo <= 0) {
-            System.out.println("Código inválido! Utilizando o código padrão 1.");
-            this.codigo = 1;
-        } else {
-            this.codigo = codigo;
-        }
+    public Evento(String nomeEvento, String tipo, double precoBaseInscricao, LocalDate dataInicial, LocalDate dataFinal, int quantSalas) {
+        this.codigo = gerarCodigoEvento();
 
         this.nomeEvento = nomeEvento;
         this.tipo = tipo;
@@ -64,7 +63,11 @@ public class Evento {
         index = 0;
     }
 
-    public int getCodigo() {
+     private String gerarCodigoEvento() {
+        return String.format("%04d", contadorEventos++);
+    }
+
+    public String getCodigo() {
         return codigo;
     }
 
@@ -106,14 +109,6 @@ public class Evento {
 
     public Inscricao[] getListaInscricoes() {
         return listaInscricoes;
-    }
-
-    public void setCodigo(int codigo) {
-        if (codigo <= 0) {
-            System.out.println("Código inválido! Mantendo o código atual.");
-        } else {
-            this.codigo = codigo;
-        }
     }
 
     public void setNomeEvento(String nomeEvento) {
