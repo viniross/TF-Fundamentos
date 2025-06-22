@@ -197,7 +197,7 @@ public class Evento {
             return;
         }
 
-        for (int i = 0; i < this.quantSalas; i++) {
+        for (int i = 0; i < this.quantSalas; i ++) {
             if (this.listaSalas[i] != null && this.listaSalas[i].getIdentificacaoSala().equals(identificacaoSala)) {
                 this.listaSalas[i] = null;
                 System.out.println("Sala removida com sucesso!");
@@ -225,6 +225,18 @@ public class Evento {
             }
         }
         return resultado;
+    }
+
+    public Sala buscaSalaPorIdentificacao(String identificacaoSala) {
+        if (identificacaoSala == null || identificacaoSala.isEmpty()) {
+            return null;
+        }
+        for (int i = 0; i < quantSalas; i++) {
+            if (listaSalas[i] != null && listaSalas[i].getIdentificacaoSala().equals(identificacaoSala)) {
+                return listaSalas[i];
+            }
+        }
+        return null;
     }
 
     public int quantSalasAlocadas() {

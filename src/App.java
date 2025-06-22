@@ -126,16 +126,16 @@ public class App {
                                     int eventoEscolhido = in.nextInt();
                                     Evento evento = listaEventos[eventoEscolhido];
 
-                                    System.out.println("Digite a Identificacao da Sala:");
+                                    System.out.println("Digite a Identificação da Sala:");
                                     identificacaoSala = in.nextLine();
 
-                                    System.out.println("Digite a Localizacao da Sala:");
+                                    System.out.println("Digite a Localização da Sala:");
                                     localizacao = in.nextLine();
 
-                                    System.out.println("Digite a Lotacao Maxima da Sala:");
+                                    System.out.println("Digite a Lotação Máxima da Sala:");
                                     lotacaoMaxima = in.nextInt();
 
-                                    System.out.println("Digite o Valor da Locacao da Sala:");
+                                    System.out.println("Digite o Valor da Locação da Sala:");
                                     valorLocacao = in.nextDouble();
 
                                     Sala novaSala = new Sala(identificacaoSala, localizacao, lotacaoMaxima, valorLocacao);
@@ -143,24 +143,38 @@ public class App {
                                     break;
 
                                 case 2:
-                                    System.out.println("Remover Sala do Evento");
-
                                     System.out.println("Escolha o evento para remover a sala:");
                                     eventoEscolhido = in.nextInt();
                                     evento = listaEventos[eventoEscolhido];
 
-                                    System.out.println("Digite a Identificacao da Sala:");
+                                    System.out.println("Digite a Identificação da Sala:");
                                     identificacaoSala = in.nextLine();
 
                                     evento.removeSala(identificacaoSala);
                                     break;
 
                                 case 3:
-                                    System.out.println("Buscar Salas por Lotação Máxima");
+                                    System.out.println("Escolha o evento para procurar por Lotação Máxima a sala:");
+                                    eventoEscolhido = in.nextInt();
+                                    evento = listaEventos[eventoEscolhido];
+
+                                    System.out.println("Digite a Lotação Máxima da Sala:");
+                                    lotacaoMaxima = in.nextInt();
+
+                                    evento.buscaSalasPorLotacao(lotacaoMaxima);
                                     break;
 
                                 case 4:
                                     System.out.println("Buscar Sala");
+
+                                    System.out.println("Escolha o evento para procurar a sala pela Identificação:");
+                                    eventoEscolhido = in.nextInt();
+                                    evento = listaEventos[eventoEscolhido];
+
+                                    System.out.println("Digite a Identificação da Sala:");
+                                    identificacaoSala = in.nextLine();
+
+                                    evento.buscaSalaPorIdentificacao(identificacaoSala);
                                     break;
 
                                 case 5:
