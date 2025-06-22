@@ -78,6 +78,7 @@ public class App {
                             Evento evento = new Evento(codigo, nomeEvento, tipo, precoBaseInscricao, dataInicial, dataFinal, quantSalas);
                             System.out.println("Evento cadastrado com sucesso!");
                             break;
+
                         case 2:
                             System.out.println("Escolha o evento para se inscrever:");
                             int eventoEscolhido = in.nextInt();
@@ -87,9 +88,7 @@ public class App {
                             nomeInscricao = in.nextLine();
 
                             System.out.println("Escolha a sua Categoria:");
-                            System.out.println("1 - Professor");
-                            System.out.println("2 - Estudante");
-                            System.out.println("3 - Profissional");
+                            menuCategoria();
                             categoria = in.nextInt();
 
                             System.out.println("Digite seu CPF:");
@@ -104,9 +103,11 @@ public class App {
                             Inscricao novaInscricao = new Inscricao(nomeInscricao, categoria, cpf, cargo, instituicao, evento.getPrecoBaseInscricao());
                             evento.addInscricao(novaInscricao);
                             break;
+
                         case 3:
                             System.out.println("Voltando ao menu principal...");
                             break;
+
                         default:
                             System.out.println("Opção inválida no menu de cadastro.");
                     }
@@ -121,35 +122,71 @@ public class App {
                             acaoConsultaEvento = in.nextInt();
                             switch (acaoConsultaEvento) {
                                 case 1:
-                                    System.out.println("Adicionar Sala ao Evento");
+                                    System.out.println("Escolha o evento para adicionar a sala:");
+                                    int eventoEscolhido = in.nextInt();
+                                    Evento evento = listaEventos[eventoEscolhido];
+
+                                    System.out.println("Digite a Identificacao da Sala:");
+                                    identificacaoSala = in.nextLine();
+
+                                    System.out.println("Digite a Localizacao da Sala:");
+                                    localizacao = in.nextLine();
+
+                                    System.out.println("Digite a Lotacao Maxima da Sala:");
+                                    lotacaoMaxima = in.nextInt();
+
+                                    System.out.println("Digite o Valor da Locacao da Sala:");
+                                    valorLocacao = in.nextDouble();
+
+                                    Sala novaSala = new Sala(identificacaoSala, localizacao, lotacaoMaxima, valorLocacao);
+                                    evento.addSala(novaSala);
                                     break;
+
                                 case 2:
                                     System.out.println("Remover Sala do Evento");
+
+                                    System.out.println("Escolha o evento para remover a sala:");
+                                    eventoEscolhido = in.nextInt();
+                                    evento = listaEventos[eventoEscolhido];
+
+                                    System.out.println("Digite a Identificacao da Sala:");
+                                    identificacaoSala = in.nextLine();
+
+                                    evento.removeSala(identificacaoSala);
                                     break;
+
                                 case 3:
                                     System.out.println("Buscar Salas por Lotação Máxima");
                                     break;
+
                                 case 4:
                                     System.out.println("Buscar Sala");
                                     break;
+
                                 case 5:
                                     System.out.println("Quantidade de Salas Alocadas");
                                     break;
+
                                 case 6:
                                     System.out.println("Quantidade de Inscritos no Evento");
                                     break;
+
                                 case 7:
                                     System.out.println("Quantidade de Inscritos por Categoria");
                                     break;
+
                                 case 8:
                                     System.out.println("Valor Total das Inscrições");
                                     break;
+
                                 case 9:
                                     System.out.println("Listar Todas as Salas Alocadas");
                                     break;
+
                                 case 10:
                                     System.out.println("Listar Todas as Inscrições no Evento");
                                     break;
+
                                 case 11:
                                     System.out.println("Voltando ao menu de consulta...");
                                     break;
