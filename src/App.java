@@ -19,8 +19,8 @@ public class App {
         int quantSalas;
         Sala[] listaSalas;
         int quantInscricoes;
-        int inscricoesCadastradas;
-        Inscricao[] listaInscricoes;
+        int inscricoesCadastradas = 0;
+        Inscricao[] listaInscricoes = new Inscricao[100];
 
         //variaveis inscricao
         String identificacaoInscricao;
@@ -119,7 +119,19 @@ public class App {
                             instituicao = in.nextLine();
 
                             Inscricao novaInscricao = new Inscricao(nomeInscricao, categoria, cpf, cargo, instituicao, evento.getPrecoBaseInscricao());
-                            evento.addInscricao(novaInscricao);
+                            boolean adicionada = evento.addInscricao(novaInscricao);
+
+                            if (adicionada) {
+                                System.out.println("Informações da Inscrição:");
+                                System.out.println("Identificação da Inscrição: " + novaInscricao.getIdentificacaoInscricao());
+                                System.out.println("Nome: " + nomeInscricao);
+                                System.out.println("Categoria: " + categoria);
+                                System.out.println("CPF: " + cpf);
+                                System.out.println("Cargo: " + cargo);
+                                System.out.println("Instituição: " + instituicao);
+                            } else {
+                                System.out.println("Não foi possível adicionar a inscrição. Limite de inscrições atingido!");
+                            }
 
                             System.out.println("Informações da Inscrição:");
                             System.out.println("Identificação da Inscrição: " + novaInscricao.getIdentificacaoInscricao());
@@ -127,7 +139,7 @@ public class App {
                             System.out.println("Categoria: " + categoria);
                             System.out.println("CPF: " + cpf);
                             System.out.println("Cargo: " + cargo);
-                            System.out.println("Instituição " + instituicao);
+                            System.out.println("Instituição: " + instituicao);
                             break;
 
                         case 3:
@@ -205,7 +217,20 @@ public class App {
                                     System.out.println("Digite a Lotação Máxima da Sala:");
                                     lotacaoMaxima = in.nextInt();
 
-                                    System.out.println("Sala: " + evento.buscaSalasPorLotacao(lotacaoMaxima));
+                                    Sala[] salasEncontradas = evento.buscaSalasPorLotacao(lotacaoMaxima);
+                                    if (salasEncontradas.length == 0) {
+                                        System.out.println("Nenhuma sala encontrada com essa lotação máxima.");
+                                    } else {
+                                        System.out.println("Salas encontradas:");
+                                        for (Sala sala : salasEncontradas) {
+                                            if (sala != null) {
+                                                System.out.println("Identificação: " + sala.getIdentificacaoSala() + 
+                                                                ", Lotação: " + sala.getLotacaoMaxima() + 
+                                                                ", Localização: " + sala.getLocalizacao() + 
+                                                                ", Valor Locação: " + sala.getValorLocacao());
+                                            }
+                                        }
+                                    }
                                     break;
 
                                 case 4: // procura sala ident
@@ -218,7 +243,17 @@ public class App {
                                     System.out.println("Digite a Identificação da Sala:");
                                     identificacaoSala = in.nextLine();
 
-                                    System.out.println("Sala: " + evento.buscaSalaPorIdentificacao(identificacaoSala));
+                                    Sala salaEncontrada = evento.buscaSalaPorIdentificacao(identificacaoSala);
+
+                                    if (salaEncontrada != null) {
+                                        System.out.println("Sala encontrada:");
+                                        System.out.println("Identificação: " + salaEncontrada.getIdentificacaoSala());
+                                        System.out.println("Localização: " + salaEncontrada.getLocalizacao());
+                                        System.out.println("Lotação Máxima: " + salaEncontrada.getLotacaoMaxima());
+                                        System.out.println("Valor de Locação: " + salaEncontrada.getValorLocacao());
+                                    } else {
+                                        System.out.println("Sala não encontrada.");
+                                    }
                                     break;
 
                                 case 5: //quant salas alocadas

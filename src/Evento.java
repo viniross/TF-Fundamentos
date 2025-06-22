@@ -57,7 +57,7 @@ public class Evento {
         }
 
         this.listaSalas = new Sala[this.quantSalas];
-        this.quantInscricoes = 0;
+        this.quantInscricoes = 100;
         this.listaInscricoes = new Inscricao[this.quantInscricoes];
         this.inscricoesCadastradas = 0;
         index = 0;
@@ -205,7 +205,7 @@ public class Evento {
     public Sala[] buscaSalasPorLotacao(int lotacaoMaxima) {
         int contSalas = 0;
         for (int i = 0; i < quantSalas; i++) {
-            if (listaSalas[i].getLotacaoMaxima() <= lotacaoMaxima) {
+            if (listaSalas[i] != null && listaSalas[i].getLotacaoMaxima() <= lotacaoMaxima) {
                 contSalas++;
             }
         }
@@ -214,13 +214,14 @@ public class Evento {
         int indexBuscaSalas = 0;
 
         for (int i = 0; i < quantSalas; i++) {
-            if (listaSalas[i].getLotacaoMaxima() <= lotacaoMaxima) {
+            if (listaSalas[i] != null && listaSalas[i].getLotacaoMaxima() <= lotacaoMaxima) {
                 resultado[indexBuscaSalas] = listaSalas[i];
-                index++;
+                indexBuscaSalas++;
             }
         }
         return resultado;
     }
+
 
     public Sala buscaSalaPorIdentificacao(String identificacaoSala) {
         if (identificacaoSala == null || identificacaoSala.isEmpty()) {
@@ -252,7 +253,7 @@ public class Evento {
 
         if (inscricoesCadastradas < quantInscricoes) {
             listaInscricoes[inscricoesCadastradas] = inscricao;
-            quantInscricoes++;
+            inscricoesCadastradas++;
             return true;
         } else {
             return false;
