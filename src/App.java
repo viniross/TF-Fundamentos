@@ -10,7 +10,7 @@ public class App {
         Evento[] listaEventos = new Evento[100];
 
         //variaveis evento
-        int codigo;
+        String codigo;
         String nomeEvento;
         String tipo;
         double precoBaseInscricao;
@@ -94,11 +94,14 @@ public class App {
                             break;
 
                         case 2:
-                            System.out.println("Escolha o evento para se inscrever:");
-                            int eventoEscolhido = in.nextInt();
-                            evento = listaEventos[eventoEscolhido];
+                            System.out.println("Digite o código do evento:");
+                            in.nextLine();
+                            codigo = in.nextLine();
+                                    
+                            evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                             System.out.println("Digite seu Nome:");
+                            in.nextLine();
                             nomeInscricao = in.nextLine();
 
                             System.out.println("Escolha a sua Categoria:");
@@ -106,6 +109,7 @@ public class App {
                             categoria = in.nextInt();
 
                             System.out.println("Digite seu CPF:");
+                            in.nextLine();
                             cpf = in.nextLine();
 
                             System.out.println("Digite seu Cargo:");
@@ -116,6 +120,14 @@ public class App {
 
                             Inscricao novaInscricao = new Inscricao(nomeInscricao, categoria, cpf, cargo, instituicao, evento.getPrecoBaseInscricao());
                             evento.addInscricao(novaInscricao);
+
+                            System.out.println("Informações da Inscrição:");
+                            System.out.println("Identificação da Inscrição: " + novaInscricao.getIdentificacaoInscricao());
+                            System.out.println("Nome: " + nomeInscricao);
+                            System.out.println("Categoria: " + categoria);
+                            System.out.println("CPF: " + cpf);
+                            System.out.println("Cargo: " + cargo);
+                            System.out.println("Instituição " + instituicao);
                             break;
 
                         case 3:
@@ -136,10 +148,11 @@ public class App {
                             acaoConsultaEvento = in.nextInt();
                             switch (acaoConsultaEvento) {
                                 case 1:
-                                    System.out.println("Digite o código do evento:");
-                                    String codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento para adicionar uma sala");
                                     in.nextLine();
-                                    Evento evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);
+                                    codigo = in.nextLine();
+                                    
+                                    Evento evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                                     if (evento == null) {
                                         System.out.println("Evento não encontrado!");
@@ -161,13 +174,20 @@ public class App {
 
                                     Sala novaSala = new Sala(identificacaoSala, localizacao, lotacaoMaxima, valorLocacao);
                                     evento.addSala(novaSala);
+
+                                    System.out.println("Informações da Sala");
+                                    System.out.println("Identificação da Sala: " + novaSala.getIdentificacaoSala());
+                                    System.out.println("Localização: " + localizacao);
+                                    System.out.println("Lotação Máxima: " + lotacaoMaxima);
+                                    System.out.println("Valor da Locação da Sala: " + valorLocacao);
                                     break;
 
                                 case 2: //remove sala
-                                    System.out.println("Digite o código do evento:");
-                                    codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento para remover uma sala");
                                     in.nextLine();
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);
+                                    codigo = in.nextLine();
+                                    
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                                     System.out.println("Digite a Identificação da Sala:");
                                     identificacaoSala = in.nextLine();
@@ -176,73 +196,79 @@ public class App {
                                     break;
 
                                 case 3: //procura lotacao maxima
-                                    System.out.println("Digite o código do evento:");
-                                    codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento para procurar a sala pela sua lotação máxima");
                                     in.nextLine();
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);
+                                    codigo = in.nextLine();
+
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                                     System.out.println("Digite a Lotação Máxima da Sala:");
                                     lotacaoMaxima = in.nextInt();
 
-                                    evento.buscaSalasPorLotacao(lotacaoMaxima);
+                                    System.out.println("Sala: " + evento.buscaSalasPorLotacao(lotacaoMaxima));
                                     break;
 
                                 case 4: // procura sala ident
-                                    System.out.println("Digite o código do evento:");
-                                    codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento para procurar a sala por sua identificação");
                                     in.nextLine();
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);
+                                    codigo = in.nextLine();
+                                    
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                                     System.out.println("Digite a Identificação da Sala:");
                                     identificacaoSala = in.nextLine();
 
-                                    evento.buscaSalaPorIdentificacao(identificacaoSala);
+                                    System.out.println("Sala: " + evento.buscaSalaPorIdentificacao(identificacaoSala));
                                     break;
 
                                 case 5: //quant salas alocadas
-                                    System.out.println("Digite o código do evento:");
-                                    codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento saber a quantidade de salas alocadas");
                                     in.nextLine();
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);
+                                    codigo = in.nextLine();
+                                    
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
-                                    evento.quantSalasAlocadas();
+                                    System.out.println("Quantidade de Salas Alocadas: " + evento.quantSalasAlocadas());
                                     break;
 
                                 case 6: //quant pessoas inscritas
-                                    System.out.println("Digite o código do evento:");
-                                    codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento para saber a quantidade de pessoas inscritas");
                                     in.nextLine();
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);
+                                    codigo = in.nextLine();
+                                    
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
-                                    evento.quantInscritos();
+                                    System.out.println("Quantidade de Pessoas Inscritas: " + evento.quantInscritos());
                                     break;
 
                                 case 7: //quant pessoas inscritas por cat
-                                    System.out.println("Digite o código do evento:");
-                                    codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento para saber a quantidade de pessoas inscritas por categoria");
                                     in.nextLine();
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);
+                                    codigo = in.nextLine();
+                                    
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
-                                    evento.quantInscritosPorCat();
+                                    System.out.println("Quantidade de Pessoas Inscritas por Categoria: " + evento.quantInscritosPorCat());
                                     break;
 
                                 case 8:
                                     System.out.println("Valor Total das Inscrições");
 
-                                    System.out.println("Digite o código do evento:");
-                                    codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento para saber quanto foi arrecadado");
                                     in.nextLine();
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);
+                                    codigo = in.nextLine();
+                                    
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
-                                    evento.valorTotalInscricoes();
+                                    System.out.println("Valor Total Arrecado " + evento.valorTotalInscricoes());
                                     break;
 
                                 case 9:
-                                    System.out.println("Listar Todas as Salas Alocadas");
-                                    System.out.println("Digite o código do evento:");
-                                    codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento para listar todas as salas alocadas");
                                     in.nextLine();
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);
+                                    codigo = in.nextLine();
+                                    
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                                     Sala[] listaSalasAux = evento.getListaSalas();
                                     int totalSalas = evento.getQuantSalas();
@@ -256,11 +282,11 @@ public class App {
                                     break;
 
                                 case 10:                                   
-                                    System.out.println("Escolha o evento para saber quem esta inscrito");
-                                    System.out.println("Digite o código do evento:");
-                                    codigoEvento = in.nextLine();
+                                    System.out.println("Digite o código do evento para saber quem está inscrito neste evento");
                                     in.nextLine();
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigoEvento);;
+                                    codigo = in.nextLine();
+                                    
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);;
 
                                     Inscricao[] listaInscricao = evento.getListaInscricoes();
                                     int total = evento.getInscricoesCadastradas();
@@ -291,7 +317,7 @@ public class App {
                                     System.out.println("Digite o seu CPF:");
                                     cpf = in.nextLine();
 
-                                    evento.buscaInscricaoPorCpf(cpf);
+                                    System.out.println("CPF: " + evento.buscaInscricaoPorCpf(cpf));
                                     break;
 
                                 case 2:
