@@ -354,7 +354,6 @@ public class App {
                                     Evento evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                                     System.out.println("Digite o seu CPF:");
-                                    in.nextLine();
                                     cpf = in.nextLine().trim();
 
                                     Inscricao inscrito = evento.buscaInscricaoPorCpf(cpf);
@@ -429,7 +428,7 @@ public class App {
                 return listaEventos[i];
             }
         }
-        return null; // evento não encontrado
+        return null; 
     }
 
 

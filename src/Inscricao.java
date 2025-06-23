@@ -106,10 +106,12 @@ public class Inscricao {
     }
 
     public void setCpf(String cpf) {
+        cpf = cpf.replace(".", "").replace("-", "").trim(); // remove pontos/traços
         if (cpf.length() == 11 && cpf.matches("[0-9]+")) {
             this.cpf = cpf;
         }
     }
+
 
     public void setCargo(String cargo) {
         this.cargo = cargo;

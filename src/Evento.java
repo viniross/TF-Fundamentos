@@ -260,14 +260,20 @@ public class Evento {
         }
     }
 
-    public Inscricao buscaInscricaoPorCpf(String cpf){
-        for(int i = 0; i < inscricoesCadastradas; i++) {
-            if (listaInscricoes[i] != null && listaInscricoes[i].getCpf().trim().equals(cpf.trim())) {
-                return listaInscricoes[i];
+    public Inscricao buscaInscricaoPorCpf(String cpf) {
+        cpf = cpf.replace(".", "").replace("-", "").trim(); // normaliza o CPF buscado
+
+        for (int i = 0; i < inscricoesCadastradas; i++) {
+            if (listaInscricoes[i] != null) {
+                String cpfSalvo = listaInscricoes[i].getCpf().replace(".", "").replace("-", "").trim(); // normaliza o CPF salvo
+                if (cpfSalvo.equals(cpf)) {
+                    return listaInscricoes[i]; // CPF encontrado
+                }
             }
         }
-        return null;
+        return null; // não encontrado
     }
+
 
     public int quantInscritos(){
         int contInscritos = 0;
