@@ -261,8 +261,8 @@ public class Evento {
     }
 
     public Inscricao buscaInscricaoPorCpf(String cpf){
-        for(int i = 0; i < index; i++) {
-            if (listaInscricoes[i].getCpf().equals(cpf) == true) {
+        for(int i = 0; i < inscricoesCadastradas; i++) {
+            if (listaInscricoes[i] != null && listaInscricoes[i].getCpf().trim().equals(cpf.trim())) {
                 return listaInscricoes[i];
             }
         }

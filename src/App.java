@@ -101,8 +101,8 @@ public class App {
                             evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                             System.out.println("Digite seu Nome:");
-                            in.nextLine();
                             nomeInscricao = in.nextLine();
+                            in.nextLine();
 
                             System.out.println("Escolha a sua Categoria:");
                             menuCategoria();
@@ -110,7 +110,7 @@ public class App {
 
                             System.out.println("Digite seu CPF:");
                             in.nextLine();
-                            cpf = in.nextLine();
+                            cpf = in.nextLine().trim();
 
                             System.out.println("Digite seu Cargo:");
                             cargo = in.nextLine();
@@ -133,13 +133,6 @@ public class App {
                                 System.out.println("Não foi possível adicionar a inscrição. Limite de inscrições atingido!");
                             }
 
-                            System.out.println("Informações da Inscrição:");
-                            System.out.println("Identificação da Inscrição: " + novaInscricao.getIdentificacaoInscricao());
-                            System.out.println("Nome: " + nomeInscricao);
-                            System.out.println("Categoria: " + categoria);
-                            System.out.println("CPF: " + cpf);
-                            System.out.println("Cargo: " + cargo);
-                            System.out.println("Instituição: " + instituicao);
                             break;
 
                         case 3:
@@ -224,10 +217,7 @@ public class App {
                                         System.out.println("Salas encontradas:");
                                         for (Sala sala : salasEncontradas) {
                                             if (sala != null) {
-                                                System.out.println("Identificação: " + sala.getIdentificacaoSala() + 
-                                                                ", Lotação: " + sala.getLotacaoMaxima() + 
-                                                                ", Localização: " + sala.getLocalizacao() + 
-                                                                ", Valor Locação: " + sala.getValorLocacao());
+                                                System.out.println("Identificação: " + sala.getIdentificacaoSala() + ", Lotação: " + sala.getLotacaoMaxima() + ", Localização: " + sala.getLocalizacao() + ", Valor Locação: " + sala.getValorLocacao());
                                             }
                                         }
                                     }
@@ -321,7 +311,7 @@ public class App {
                                     in.nextLine();
                                     codigo = in.nextLine();
                                     
-                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);;
+                                    evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                                     Inscricao[] listaInscricao = evento.getListaInscricoes();
                                     int total = evento.getInscricoesCadastradas();
@@ -333,6 +323,18 @@ public class App {
                                     break;
 
                                 case 11:
+                                    System.out.println("Lista de eventos cadastrados:");
+                                    for (int i = 0; i < totalEventos; i++) {
+                                        if (listaEventos[i] != null) {
+                                            System.out.println("Código do Evento: " + listaEventos[i].getCodigo());
+                                            System.out.println("Nome do Evento: " + listaEventos[i].getNomeEvento());
+                                            System.out.println("Tipo do Evento: " + listaEventos[i].getTipo());
+                                        }
+                                    }
+
+                                    break;
+
+                                case 12:
                                     System.out.println("Voltando ao menu de consulta...");
                                     break;
 
@@ -345,14 +347,28 @@ public class App {
                             acaoConsultaInscricaoEvento = in.nextInt();
                             switch (acaoConsultaInscricaoEvento) {
                                 case 1:
-                                    System.out.println("Escolha o evento para buscar um inscrito pelo seu CPF");
-                                    int eventoEscolhido = in.nextInt();
-                                    Evento evento = listaEventos[eventoEscolhido];
+                                    System.out.println("Digite o código do evento para buscar um inscrito pelo seu CPF");
+                                    in.nextLine();
+                                    codigo = in.nextLine();
+                                    
+                                    Evento evento = buscarEventoPorCodigo(listaEventos, totalEventos, codigo);
 
                                     System.out.println("Digite o seu CPF:");
-                                    cpf = in.nextLine();
+                                    in.nextLine();
+                                    cpf = in.nextLine().trim();
 
-                                    System.out.println("CPF: " + evento.buscaInscricaoPorCpf(cpf));
+                                    Inscricao inscrito = evento.buscaInscricaoPorCpf(cpf);
+
+                                    if (inscrito != null) {
+                                        System.out.println("Inscrição encontrada:");
+                                        System.out.println("Nome: " + inscrito.getNomeInscricao());
+                                        System.out.println("CPF: " + inscrito.getCpf());
+                                        System.out.println("Categoria: " + inscrito.getCategoria());
+                                        System.out.println("Cargo: " + inscrito.getCargo());
+                                        System.out.println("Instituição: " + inscrito.getInstituicao());
+                                    } else {
+                                        System.out.println("Inscrição não encontrada!");
+                                    }
                                     break;
 
                                 case 2:
@@ -369,6 +385,7 @@ public class App {
                             switch (acaoConsultaInscricao) {
                                 case 1:
                                     System.out.println("Digite seu CPF para saber todos eventos que voce está cadastrado");
+                                    in.nextLine();
                                     cpf = in.nextLine();
 
                                     Evento[] eventosDaPessoa = buscaEventosPorCpf(cpf, listaEventos);
@@ -484,7 +501,8 @@ public class App {
         System.out.println("|  8 - Valor Total das Inscricoes                       |");
         System.out.println("|  9 - Listar Todas Salas Alocadas                      |");
         System.out.println("|  10 - Listar Todas Inscricoes                         |");
-        System.out.println("|  11 - Voltar para o Menu Consultar                    |");
+        System.out.println("|  11 - Listar Todos Eventos Disponíveis                |");
+        System.out.println("|  12 - Voltar para o Menu Consultar                    |");
         System.out.println("|_______________________________________________________|");
     }
 
